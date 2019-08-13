@@ -1,5 +1,7 @@
 # Data Engineering + Scala
 
+As a **Data Engineer**, you’ll be managing data pipelines for companies that deal with large volumes of data. That means making sure that your data is being efficiently collected and retrieved from its source when needed, cleaned and preprocessed.
+
 ## Big Data Foundations
 - https://www.udemy.com/big-data-and-hadoop-essentials-free-tutorial
 
@@ -63,9 +65,10 @@
 - Study the Apache Spark documentation
   - Running Spark on Kubernetes - https://spark.apache.org/docs/latest/running-on-kubernetes.html
   
-### Apache Airflow
+## Apache Airflow
 - Familiarize yourself with Apache Airflow 
   - Documentation - https://airflow.apache.org/
   - Getting started with Apache Airflow - https://towardsdatascience.com/getting-started-with-apache-airflow-df1aa77d7b1b
-- Create a sample DAG for a Spark submit and schedule its execution
-- Create a Python script to create the same DAG programatically via Airflow API
+  - Airflow tutorial videos - https://www.youtube.com/playlist?list=PLYizQ5FvN6pvIOcOd6dFZu3lQqc6zBGp2
+- Create a sample DAG via UI for a Spark submit and run it
+- Create a Python script defining the same DAG programatically via Airflow API and run it on Airflow
