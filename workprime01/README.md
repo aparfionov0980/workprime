@@ -23,5 +23,5 @@ Following environmental variables must be also set in your system:
 
 ### How to run
 Open Workprime01 directory. Run `sbt compile` task. After successful compilation type `sbt run {table_name} {records_size}` into the terminal
-where `{table name}` is a name for the table and `{record_size}` is a number of records to be generated. In case of successful work the last output row
+where `{table name}` is a name for the table and `{record_size}` is a number of records to generate. In case of successful work the last output row
 should be like this `Records inserted`
