@@ -29,7 +29,7 @@ object App {
 
     //query to create table with @tableName
     val query02 = s"""create table ${tableName}
-      (product_id integer, product_group varchar(10), year varchar(10),
+      (product_id integer, product_group integer, year varchar(10),
        jan_sales integer, feb_sales integer, mar_sales integer,
       apr_sales integer, may_sales integer, jun_sales integer,
       jul_sales integer, aug_sales integer, sep_sales integer,
@@ -59,31 +59,32 @@ object App {
 
       //Build query to insert records
       records.foreach(r => {
-        stmt_updateTable.setString(1, r.product_id)
-        stmt_updateTable.setString(2, r.product_group)
+        stmt_updateTable.setInt(1, r.product_id)
+        stmt_updateTable.setInt(2, r.product_group)
         stmt_updateTable.setString(3, r.year)
 
-        stmt_updateTable.setString(4, r.jan_sales.toString)
-        stmt_updateTable.setString(5, r.feb_sales.toString)
-        stmt_updateTable.setString(6, r.mar_sales.toString)
+        stmt_updateTable.setInt(4, r.jan_sales)
+        stmt_updateTable.setInt(5, r.feb_sales)
+        stmt_updateTable.setInt(6, r.mar_sales)
 
-        stmt_updateTable.setString(7, r.apr_sales.toString)
-        stmt_updateTable.setString(8, r.may_sales.toString)
-        stmt_updateTable.setString(9, r.jun_sales.toString)
+        stmt_updateTable.setInt(7, r.apr_sales)
+        stmt_updateTable.setInt(8, r.may_sales)
+        stmt_updateTable.setInt(9, r.jun_sales)
 
-        stmt_updateTable.setString(10, r.jul_sales.toString)
-        stmt_updateTable.setString(11, r.aug_sales.toString)
-        stmt_updateTable.setString(12, r.sep_sales.toString)
+        stmt_updateTable.setInt(10, r.jul_sales)
+        stmt_updateTable.setInt(11, r.aug_sales)
+        stmt_updateTable.setInt(12, r.sep_sales)
 
-        stmt_updateTable.setString(13, r.oct_sales.toString)
-        stmt_updateTable.setString(14, r.nov_sales.toString)
-        stmt_updateTable.setString(15, r.dec_sales.toString)
+        stmt_updateTable.setInt(13, r.oct_sales)
+        stmt_updateTable.setInt(14, r.nov_sales)
+        stmt_updateTable.setInt(15, r.dec_sales)
 
         stmt_updateTable.addBatch()
       })
 
       //Insert records
       stmt_updateTable.executeBatch()
+      stmt_updateTable.close()
       println("Records inserted")
     } catch {
       case ex: Exception => {
@@ -114,8 +115,8 @@ object App {
     //Then method generates number of records (from 1 to 4) with the list of years (2015 - 2018)
     //After that method generates records with random month sales and inserts it into the result list
     while (remain > 0) {
-      val prod_id = idCounter.toString
-      val prod_group = r1.nextInt(10).toString
+      val prod_id = idCounter
+      val prod_group = r1.nextInt(10)
 
       var record_number = r1.nextInt(5)
       if (record_number > remain) record_number = remain
@@ -124,7 +125,7 @@ object App {
       for(a <- 0 until record_number){
         val record = ProductRecord(prod_id,
           prod_group,
-          years(a).toString,
+          years(a),
           r1.nextInt(100000),
           r1.nextInt(100000),
           r1.nextInt(100000),
@@ -154,13 +155,13 @@ object App {
    * @param size Number of years to generate
    * @return List[productRecord] List of generated years
    * */
-  def genYears(size: Integer): List[Integer] = {
-    val res = ListBuffer.empty[Integer]
+  def genYears(size: Integer): List[String] = {
+    val res = ListBuffer.empty[String]
     val rand = Random
 
     var counter = size
     while (counter > 0) {
-      val year = 2015 + rand.nextInt(4)
+      val year = (2015 + rand.nextInt(4)).toString
       if (!res.contains(year)){
         res.insert(0, year)
         counter -= 1
@@ -188,8 +189,8 @@ object App {
    * @param nov_sales
    * @param dec_sales
    */
-  case class ProductRecord(product_id: String,
-                           product_group: String,
+  case class ProductRecord(product_id: Integer,
+                           product_group: Integer,
                            year: String,
                            jan_sales: Integer, feb_sales: Integer, mar_sales: Integer,
                            apr_sales: Integer, may_sales: Integer, jun_sales: Integer,
