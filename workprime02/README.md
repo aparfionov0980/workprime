@@ -7,7 +7,7 @@ Workprime02 is an application that take data from db2 database, transform it in 
 So the output data has the following schema:
 
 product_id | product_group | years | jan_sales | ... | dec_sales
----------- | ------------- | ----- | --------- | ... | ---------
+---------- | ------------- | ----- | --------- | --- | ---------
 
 And the output data generates like this:
 
