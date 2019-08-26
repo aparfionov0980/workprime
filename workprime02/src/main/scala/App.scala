@@ -30,7 +30,7 @@ object App {
     val output = args(3)
 
     //init spark session
-    val ss = buildSession("workprime02", "master[*]")
+    val ss = SparkSession.builder().getOrCreate()
     val sc: SparkContext = ss.sparkContext
     val sqlContxt: SQLContext = ss.sqlContext
 
@@ -61,27 +61,6 @@ object App {
       .format(format)
       .option("header", "true")
       .save(uri)
-  }
-
-  /**
-    * Build spark session.
-    * @param appName
-    * @param master
-    * @return
-    */
-  def buildSession(appName: String, master: String): SparkSession = {
-    val master = "local[*]"
-    val appName = "workprime02"
-    val conf: SparkConf = new SparkConf()
-
-    conf.setMaster(master)
-      .setAppName(appName)
-
-    val ss: SparkSession = SparkSession.builder()
-      .config(conf)
-      .getOrCreate()
-
-    ss
   }
 
   /**
