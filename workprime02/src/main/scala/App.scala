@@ -35,10 +35,10 @@ object App {
     val sqlContxt: SQLContext = ss.sqlContext
 
     //init db2 variables
-    val username = sys.env("DB2_USERNAME") //"rhl98436"
-    val password = sys.env("DB2_PASSWORD") //"svjmvdbc0zcg-xz5"
-    val jdbc_url = sys.env("JDBC_URL") //"jdbc:db2://dashdb-txn-sbox-yp-lon02-02.services.eu-gb.bluemix.net:50000/BLUDB"
-    val table = tableName //"DATA01"
+    val username = sys.env("DB2_USERNAME")
+    val password = sys.env("DB2_PASSWORD")
+    val jdbc_url = sys.env("JDBC_URL")
+    val table = tableName
 
     //init cos variables
     val serviceName = "cos01"
