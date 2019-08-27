@@ -1,13 +1,27 @@
-# Data Engineering + Scala
+# Data Engineer / Scala
 
 As a **Data Engineer**, you’ll be managing data pipelines for companies that deal with large volumes of data. That means making sure that your data is being efficiently collected and retrieved from its source when needed, cleaned and preprocessed.
 
+**Required skills:**
+- Strong programming skills in Java and/or Scala
+- Solid foundation in SQL
+- Experience working with Apache Spark
+- Cloud containerization environments and micro-services: Docker, Kubernetes
+- Experience working with Apache Airflow
+
+**Desired skills:**
+- Hadoop and/or Hive
+- Stream-processing software: Kafka, RabbitMQ, MQTT, Apache Spark Streaming
+- noSQL databases: ElasticSearch, Cloudant
+
 ## Big Data Foundations
-- https://www.udemy.com/big-data-and-hadoop-essentials-free-tutorial
+- Complete the following course to get essential understanding about Big Data and Hadoop
+  - Big Data and Hadoop Essentials - https://www.udemy.com/big-data-and-hadoop-essentials-free-tutorial
 
 ## Scala + Apache Spark
-- https://cognitiveclass.ai/learn/scala/
-- https://www.udemy.com/scala-and-spark-2-getting-started
+- Complete the courses to start with base knowledge of Scala and Apache Spark
+  - https://cognitiveclass.ai/learn/scala/
+  - https://www.udemy.com/scala-and-spark-2-getting-started
 
 ## IBM Cloud + Apache Spark
 - Create IBM Cloud account - https://cloud.ibm.com/registration
@@ -26,6 +40,8 @@ As a **Data Engineer**, you’ll be managing data pipelines for companies that d
   - There should be no duplicates for the same product/year
   - If there are multiple product rows for different years, product/group combination should be concise
 - Application should be built using **sbt** tool
+- Use environment variables to specify configuration parameters like JDBC URL and connection credentials
+- Add description of the application functionality and instructions on how to run it into a *README.md* file in Github
 
 ### Training Application - Data Transformation
 - Create a data tranformation application using Apache Spark
@@ -37,6 +53,10 @@ As a **Data Engineer**, you’ll be managing data pipelines for companies that d
 - Save the modified dataframe as a file in Cloud Object Storage - https://www.ibm.com/cloud/object-storage
   - Use Stocator library - https://github.com/CODAIT/stocator
 - Application should be built using **sbt** tool and published to Github
+- Use *spark-submit* to run the application and Spark configuration properties to specify configuration parameters like JDBC URL and connection credentials
+  - Submitting Applications - https://spark.apache.org/docs/latest/submitting-applications.html
+  - Method to get Spark configuration properties - https://spark.apache.org/docs/2.3.0/api/java/org/apache/spark/SparkContext.html#getConf--
+- Add description of the application functionality and instructions on how to run it using *spark-submit* into a *README.md* file in Github
 
 ### Training Application - Data Partitioning
 - Modify the data transformation application to support data partitioning
@@ -47,6 +67,7 @@ As a **Data Engineer**, you’ll be managing data pipelines for companies that d
   - How to optimize partitioning when migrating data from JDBC source? - https://stackoverflow.com/questions/52603131/how-to-optimize-partitioning-when-migrating-data-from-jdbc-source
   - How to improve performance for slow Spark jobs using DataFrame and JDBC connection? - https://stackoverflow.com/questions/32188295/how-to-improve-performance-for-slow-spark-jobs-using-dataframe-and-jdbc-connecti
 - Application should be built using **sbt** tool and published to Github
+- Add description of the application functionality and instructions on how to run it using *spark-submit* into a *README.md* file in Github
 
 ### Training Application - Unit Tests
 - Add unit tests to the training application
@@ -72,3 +93,9 @@ As a **Data Engineer**, you’ll be managing data pipelines for companies that d
   - Airflow tutorial videos - https://www.youtube.com/playlist?list=PLYizQ5FvN6pvIOcOd6dFZu3lQqc6zBGp2
 - Create a sample DAG via UI for a Spark submit and run it
 - Create a Python script defining the same DAG programatically via Airflow API and run it on Airflow
+
+## Optional Training
+- Complete the following learning paths
+  - Hadoop Fundamentals - https://cognitiveclass.ai/learn/hadoop/
+  - Hadoop Programming - https://cognitiveclass.ai/learn/big-data-hadoop-programming/
+  - Hadoop Data Access - https://cognitiveclass.ai/learn/big-data-storage-and-retrieval/
