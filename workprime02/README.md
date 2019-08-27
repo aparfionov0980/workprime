@@ -24,15 +24,15 @@ Following packages must be specified in `spark-submit` command:
 * com.ibm.stocator:stocator:1.0.35.
 
 Following parameters must be also set after `--conf` property:
-* For db2 connection:
- * spark.db2_jdbc_url - url for the jdbc driver
- * spark.db2_username - db2 database username
- * spark.db2_password - db2 database password
-* For Cloud Object Storage connection:
- * spark.cos_service_name - cos service name
- * spark.cos_endpoint - bucket endpoint url
- * spark.cos_access_key - access key generated in credentials
- * spark.cos_secret_key - secret key generated in credentials 
+- For db2 connection:
+  - spark.db2_jdbc_url - url for the jdbc driver
+  - spark.db2_username - db2 database username
+  - spark.db2_password - db2 database password
+- For Cloud Object Storage connection:
+  - spark.cos_service_name - cos service name
+  - spark.cos_endpoint - bucket endpoint url
+  - spark.cos_access_key - access key generated in credentials
+  - spark.cos_secret_key - secret key generated in credentials 
 
 ### How to run
 To run Workprime02 use `spark-submit --packages {libs} {spark-params} {spark-conf} {path/to/jar} {table name} {bucket_name} {format} {output}`, where:
