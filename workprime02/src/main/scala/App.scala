@@ -37,10 +37,8 @@ object App {
       val output = args(3)
 
       //check file format
-      var isFormatIncorrect = true
-      SUPPORTED_FILE_EXTENSIONS.foreach(ff => if (ff.equals(format)) isFormatIncorrect = false)
-
-      if (isFormatIncorrect) throw new InvalidTypeException("Invalid format" + format)
+      if (!SUPPORTED_FILE_EXTENSIONS.contains(format))
+        throw new InvalidTypeException("Invalid format" + format)
 
       //init spark session
       val ss = SparkSession.builder().getOrCreate()
