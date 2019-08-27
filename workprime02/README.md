@@ -23,20 +23,22 @@ Following packages must be specified in `spark-submit` command:
 * com.ibm.db2.jcc:db2jcc:db2jcc4,
 * com.ibm.stocator:stocator:1.0.35.
 
-Following environmental variables must be also set in your system:
+Following parameters must be also set after `--conf` property:
 * For db2 connection:
- * DB2_JDBC-URl - url for the jdbc driver
- * DB2_USERNAME - db2 database username
- * DB2_PASSWORD - db2 database password
+ * spark.db2_jdbc_url - url for the jdbc driver
+ * spark.db2_username - db2 database username
+ * spark.db2_password - db2 database password
 * For Cloud Object Storage connection:
- * COS_ENDPOINT - bucket endpoint url
- * COS_ACCESS_KEY - access key generated in credentials
- * COS_SECRET_KEY - secret key generated in credentials 
+ * spark.cos_service_name - cos service name
+ * spark.cos_endpoint - bucket endpoint url
+ * spark.cos_access_key - access key generated in credentials
+ * spark.cos_secret_key - secret key generated in credentials 
 
 ### How to run
-To run Workprime02 use `spark-submit --packages {libs} {spark-params} {path/to/jar} {table name} {bucket_name} {format} {output}`, where:
+To run Workprime02 use `spark-submit --packages {libs} {spark-params} {spark-conf} {path/to/jar} {table name} {bucket_name} {format} {output}`, where:
 * `{libs}` - packages with needs to run application. Listed above
 * `{spark-params}` - spark parameters like `name`, `master`
+* `{spark-conf}` - arbitrary Spark configuration property in key=value format. All necessary properties are listed above.
 * `{path/to/jar}` - path to the jar file
 * `{table name}` - name of the table in db2 database
 * `{bucket_name}` - name of the bucket in Cloud Object Storage
