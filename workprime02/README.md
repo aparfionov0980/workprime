@@ -23,6 +23,11 @@ Following packages must be specified in `spark-submit` command:
 * com.ibm.db2.jcc:db2jcc:db2jcc4,
 * com.ibm.stocator:stocator:1.0.35.
 
+Supported file extensions:
+* txt
+* csv
+* parquet
+
 Following parameters must be also set after `--conf` property:
 - For db2 connection:
   - spark.db2_jdbc_url - url for the jdbc driver
@@ -42,5 +47,5 @@ To run Workprime02 use `spark-submit --packages {libs} {spark-params} {spark-con
 * `{path/to/jar}` - path to the jar file
 * `{table name}` - name of the table in db2 database
 * `{bucket_name}` - name of the bucket in Cloud Object Storage
-* `{format}` - file format in wich to write output data
+* `{format}` - file format in wich to write output data. Supported file extensions listed above
 * `{output}` - output data name
