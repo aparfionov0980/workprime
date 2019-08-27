@@ -35,16 +35,16 @@ object App {
     val sqlContxt: SQLContext = ss.sqlContext
 
     //init db2 variables
-    val username = sys.env("DB2_USERNAME")
-    val password = sys.env("DB2_PASSWORD")
-    val jdbc_url = sys.env("JDBC_URL")
+    val username = sc.getConf.get("spark.db2_username")
+    val password = sc.getConf.get("spark.db2_password")
+    val jdbc_url = sc.getConf.get("spark.db2_jdbc_url")
     val table = tableName
 
     //init cos variables
-    val serviceName = "cos01"
-    val endpoint = sys.env("COS_ENDPOINT")
-    val accessKey = sys.env("COS_ACCESS_KEY")
-    val secretKey = sys.env("COS_SECRET_KEY")
+    val serviceName = sc.getConf.get("spark.cos_service.name")
+    val endpoint = sc.getConf.get("spark.cos_endpoint")
+    val accessKey = sc.getConf.get("spark.cos_access_key")
+    val secretKey = sc.getConf.get("spark.cos_secret_key")
 
     //Hadoop FS configuration
     configureHadoopFS(sc, endpoint, accessKey, secretKey, serviceName)
