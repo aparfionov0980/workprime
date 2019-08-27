@@ -15,7 +15,7 @@ product_id | product_group | years | year_purchase
 ---------- | ------------- | ----- | -------------
 
 ### Requirements
-To run Workprime01 on your machine consider this software to be installed:
+To run Workprime02 on your machine consider this software to be installed:
 * JRE 1.8 or higher
 * Spark 2.4.3 or higher
 
