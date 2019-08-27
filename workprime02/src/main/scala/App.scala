@@ -41,7 +41,7 @@ object App {
     val table = tableName
 
     //init cos variables
-    val serviceName = sc.getConf.get("spark.cos_service.name")
+    val serviceName = sc.getConf.get("spark.cos_service_name")
     val endpoint = sc.getConf.get("spark.cos_endpoint")
     val accessKey = sc.getConf.get("spark.cos_access_key")
     val secretKey = sc.getConf.get("spark.cos_secret_key")
