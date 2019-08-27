@@ -75,10 +75,26 @@ object App {
         .option("header", "true")
         .save(uri)
     } catch {
-      case typeEx: InvalidTypeException => {}
-      case sqlEx: SQLInvalidAuthorizationSpecException => {}
-      case argsEx: ArrayIndexOutOfBoundsException => {}
-      case ex: Exception => {}
+      case typeEx: InvalidTypeException => {
+        println("Invalid output file extension: " + typeEx.getMessage)
+        typeEx.printStackTrace()
+      }
+      case sqlEx: SQLInvalidAuthorizationSpecException => {
+        println("Invalid db2 credentials: " + sqlEx.getMessage)
+        sqlEx.printStackTrace()
+      }
+      case argsEx: ArrayIndexOutOfBoundsException => {
+        println("Not enough arguments specified: " + argsEx.getMessage)
+        argsEx.printStackTrace()
+      }
+      case sparkConfEx: NoSuchElementException => {
+        println("Following key is not specified:" + sparkConfEx.getMessage)
+        sparkConfEx.printStackTrace()
+      }
+      case ex: Exception => {
+        println("Unknown exception: " + ex.getMessage)
+        ex.printStackTrace()
+      }
     }
   }
 
