@@ -1,3 +1,6 @@
+import java.sql.SQLInvalidAuthorizationSpecException
+
+import com.amazonaws.jmespath.InvalidTypeException
 import org.apache.spark.sql.types._
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.{DataFrame, Row, SQLContext, SparkSession}
@@ -23,44 +26,60 @@ object App {
     *              (3) - output file name (without extension)
     */
   def main(args: Array[String]): Unit = {
-    //init arguments
-    val tableName = args(0)
-    val bucketName = args(1)
-    val format = args(2)
-    val output = args(3)
+    try{
+      //Supported file extensions
+      val SUPPORTED_FILE_EXTENSIONS = List("txt", "csv", "parquet")
 
-    //init spark session
-    val ss = SparkSession.builder().getOrCreate()
-    val sc: SparkContext = ss.sparkContext
-    val sqlContxt: SQLContext = ss.sqlContext
+      //init arguments
+      val tableName = args(0)
+      val bucketName = args(1)
+      val format = args(2)
+      val output = args(3)
 
-    //init db2 variables
-    val username = sc.getConf.get("spark.db2_username")
-    val password = sc.getConf.get("spark.db2_password")
-    val jdbc_url = sc.getConf.get("spark.db2_jdbc_url")
-    val table = tableName
+      //check file format
+      var isFormatIncorrect = true
+      SUPPORTED_FILE_EXTENSIONS.foreach(ff => if (ff.equals(format)) isFormatIncorrect = false)
 
-    //init cos variables
-    val serviceName = sc.getConf.get("spark.cos_service_name")
-    val endpoint = sc.getConf.get("spark.cos_endpoint")
-    val accessKey = sc.getConf.get("spark.cos_access_key")
-    val secretKey = sc.getConf.get("spark.cos_secret_key")
+      if (isFormatIncorrect) throw InvalidTypeException
 
-    //Hadoop FS configuration
-    configureHadoopFS(sc, endpoint, accessKey, secretKey, serviceName)
+      //init spark session
+      val ss = SparkSession.builder().getOrCreate()
+      val sc: SparkContext = ss.sparkContext
+      val sqlContxt: SQLContext = ss.sqlContext
 
-    //get data from db2 table
-    val df01 = getDataFromDB2(ss, username, password, jdbc_url, table)
+      //init db2 variables
+      val username = sc.getConf.get("spark.db2_username")
+      val password = sc.getConf.get("spark.db2_password")
+      val jdbc_url = sc.getConf.get("spark.db2_jdbc_url")
+      val table = tableName
 
-    //transform data into new data frame
-    val df02 = transformData(ss, df01)
+      //init cos variables
+      val serviceName = sc.getConf.get("spark.cos_service_name")
+      val endpoint = sc.getConf.get("spark.cos_endpoint")
+      val accessKey = sc.getConf.get("spark.cos_access_key")
+      val secretKey = sc.getConf.get("spark.cos_secret_key")
 
-    //write transformed data into cos
-    val uri = s"cos://$bucketName.$serviceName/$output.$format"
-    df02.write
-      .format(format)
-      .option("header", "true")
-      .save(uri)
+      //Hadoop FS configuration
+      configureHadoopFS(sc, endpoint, accessKey, secretKey, serviceName)
+
+      //get data from db2 table
+      val df01 = getDataFromDB2(ss, username, password, jdbc_url, table)
+
+      //transform data into new data frame
+      val df02 = transformData(ss, df01)
+
+      //write transformed data into cos
+      val uri = s"cos://$bucketName.$serviceName/$output.$format"
+      df02.write
+        .format(format)
+        .option("header", "true")
+        .save(uri)
+    } catch {
+      case typeEx: InvalidTypeException => {}
+      case sqlEx: SQLInvalidAuthorizationSpecException => {}
+      case argsEx: ArrayIndexOutOfBoundsException => {}
+      case ex: Exception => {}
+    }
   }
 
   /**
