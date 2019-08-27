@@ -4,7 +4,7 @@ Workprime02 is a spark application that take data from db2 database, transform i
 * `month_sales` columns are deleted from table schema
 * For each row year_purchase column is calculated by aggregating `month_sales`
 
-So the output data has the following schema:
+So the input data has the following schema:
 
 product_id | product_group | years | jan_sales | ... | dec_sales
 ---------- | ------------- | ----- | --------- | --- | ---------
