@@ -46,7 +46,7 @@ object App {
       val sc: SparkContext = ss.sparkContext
       val sqlContext: SQLContext = ss.sqlContext
 
-      sc.setLogLevel("ERROR")
+      //sc.setLogLevel("ERROR")
 
       //init db2 variables
       val username = sc.getConf.get("spark.db2_username")
@@ -73,7 +73,9 @@ object App {
 
       //write transformed data into cos
       val uri = s"cos://$bucketName.$serviceName/$output.$format"
-      df02.write
+      df02.coalesce(1)
+        .write
+        .partitionBy("year")
         .format(format)
         .option("header", "true")
         .save(uri)
@@ -124,8 +126,10 @@ object App {
       .option("password", password)
       .option("dbtable", table)
       .option("numPartitions", partitionsNum)
+      .option("partitionColumn", "PRODUCT_ID")
+      .option("lowerBound", 0)
+      .option("upperBound", 20000)
       .load()
-      .repartition(partitionExprs = functions.col("YEAR"))
 
     df
   }
