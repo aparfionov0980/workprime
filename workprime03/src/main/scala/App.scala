@@ -22,9 +22,10 @@ object App {
    * Main Application Method
    * @param args - must contain:
    *              (0) - table name in db2 database
-   *              (1) - bucket name in cos where to write data
-   *              (2) - format for the output file
-   *              (3) - output file name (without extension)
+   *              (1) - records size in the table
+   *              (2) - bucket name in cos where to write data
+   *              (3) - format for the output file
+   *              (4) - output file name (without extension)
    */
   def main(args: Array[String]): Unit = {
     try{
@@ -33,9 +34,10 @@ object App {
 
       //init arguments
       val tableName = args(0)
-      val bucketName = args(1)
-      val format = args(2)
-      val output = args(3)
+      val recordsSize = args(1)
+      val bucketName = args(2)
+      val format = args(3)
+      val output = args(4)
 
       //check file format
       if (!SUPPORTED_FILE_EXTENSIONS.contains(format))
@@ -54,6 +56,7 @@ object App {
       val jdbc_url = sc.getConf.get("spark.db2_jdbc_url")
       val partitionNum = sc.getConf.get("spark.db2_partition_num").toInt
       val table = tableName
+      val size = recordsSize.toInt
 
       //init cos variables
       val serviceName = sc.getConf.get("spark.cos_service_name")
@@ -66,7 +69,7 @@ object App {
 
       //get data from db2 table
       val df01 = getDataFromDB2(ss, username, password,
-        jdbc_url, table, partitionNum)
+        jdbc_url, table, partitionNum, size)
 
       //transform data into new data frame
       val df02 = transformData(ss, df01)
@@ -114,10 +117,11 @@ object App {
    * @param jdbc_url
    * @param table
    * @param partitionsNum
+   * @param size
    * @return
    */
   def getDataFromDB2(spark: SparkSession, username: String, password: String,
-                     jdbc_url: String, table: String, partitionsNum: Int): DataFrame = {
+                     jdbc_url: String, table: String, partitionsNum: Int, size: Int): DataFrame = {
     val df = spark.read
       .format("jdbc")
       .option("url", jdbc_url)
@@ -128,7 +132,7 @@ object App {
       .option("numPartitions", partitionsNum)
       .option("partitionColumn", "PRODUCT_ID")
       .option("lowerBound", 0)
-      .option("upperBound", 20000)
+      .option("upperBound", size)
       .load()
 
     df
