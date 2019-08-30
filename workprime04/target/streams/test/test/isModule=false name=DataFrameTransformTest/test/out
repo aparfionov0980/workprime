@@ -1,0 +1,3 @@
+[info] DataFrameTransformTest:
+[info] DataFrame check
+[info] - DF02_fake should be equal to App.transformData(DF01_fake)
