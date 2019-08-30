@@ -1,5 +1,0 @@
-[info] SetSpec:
-[info] A Test cases
-[info]   When all args 0
-[info]   - sum should be 0 *** FAILED ***
-[info]     Expected 0, but got 5 (SetSpec.scala:7)
