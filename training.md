@@ -88,6 +88,14 @@ As a **Data Engineer**, you’ll be managing data pipelines for companies that d
 - Study the Apache Spark documentation
   - Running Spark on Kubernetes - https://spark.apache.org/docs/latest/running-on-kubernetes.html
   
+## Minikube
+- Install Minikube on your local PC.
+  - Use the following guide to install kubectl https://kubernetes.io/docs/tasks/tools/install-kubectl/
+  - Use the following guide to install minikube https://kubernetes.io/docs/tasks/tools/install-minikube/
+- Complete the following tutorial https://kubernetes.io/docs/tutorials/kubernetes-basics/
+- Run your test application on minikube
+  - Create deployment out of your test application
+  
 ## Apache Airflow
 - Familiarize yourself with Apache Airflow 
   - Documentation - https://airflow.apache.org/
