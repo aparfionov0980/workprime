@@ -81,6 +81,8 @@ As a **Data Engineer**, you’ll be managing data pipelines for companies that d
 - Complete the following courses
   - Docker Essentials: A Developer Introduction - https://cognitiveclass.ai/courses/docker-essentials/
   - Container & Kubernetes Essentials with IBM Cloud - https://cognitiveclass.ai/courses/kubernetes-course/
+- Look at the best practices
+  - Best practices for writing Dockerfiles - https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
   
 ## Spark + Kubernetes
 - Study the Apache Spark documentation
@@ -91,8 +93,13 @@ As a **Data Engineer**, you’ll be managing data pipelines for companies that d
   - Documentation - https://airflow.apache.org/
   - Getting started with Apache Airflow - https://towardsdatascience.com/getting-started-with-apache-airflow-df1aa77d7b1b
   - Airflow tutorial videos - https://www.youtube.com/playlist?list=PLYizQ5FvN6pvIOcOd6dFZu3lQqc6zBGp2
+  - Airflow: Lesser Known Tips, Tricks, and Best Practises - https://medium.com/datareply/airflow-lesser-known-tips-tricks-and-best-practises-cf4d4a90f8f
 - Create a sample DAG via UI for a Spark submit and run it
 - Create a Python script defining the same DAG programatically via Airflow API and run it on Airflow
+
+For quick overview of how Airflow clusters work look at these two articles:
+- How Apache Airflow Distributes Jobs on Celery workers - https://blog.sicara.com/using-airflow-with-celery-workers-54cb5212d405
+- Setting up an Apache Airflow Cluster - http://site.clairvoyantsoft.com/setting-apache-airflow-cluster/
 
 ## Optional Training
 - Complete the following learning paths
